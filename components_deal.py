@@ -7,11 +7,11 @@ images = []
 for i in range(0, 20):
     image_path = path+f"/p{i}.png"
     img = cv2.imread(image_path)
+    # print(type(img))
     images.append(np.array(img,dtype=np.int16))
 mean_img = cv2.imread(path+f"/mean.png")
 
-# output = np.array(mean_img,dtype=np.int16)
-output = np.array(cv2.rotate(mean_img, cv2.ROTATE_180),dtype=np.int16)
+output = np.array(mean_img,dtype=np.int16)
 print("principle images loaded")
 
 cv2.namedWindow('PCA',cv2.WINDOW_NORMAL)
