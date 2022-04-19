@@ -1,4 +1,3 @@
-from itertools import count
 from sklearn.decomposition import PCA
 import numpy as np
 import cv2
@@ -17,7 +16,7 @@ print("Loaded all",i,"images")
 # change into numpy matrix
 all_image = np.stack(input,axis=0)
 # trans to 0-1 format float32!
-all_image = (all_image.astype(np.float64)-128)/127 
+all_image = (all_image.astype(np.float64)-128)*50/127 
 
 ### shape: #_of_imag x image_pixel_num (50331648 for img_normals case)
 # print(all_image)
@@ -39,7 +38,7 @@ result=result.reshape(-1,4096,4096,3)
 dst=result/np.linalg.norm(result,axis=(3),keepdims=True)
 saving_path = "./principle64"
 for i in range(20):
-    reconImage=(dst)[i].reshape(4096,4096,3)*127+128
+    reconImage=(dst)[i].reshape(4096,4096,3)/50*127+128
     cv2.imwrite(os.path.join(saving_path,("p"+str(i)+".png")),reconImage)
 print("Saved",i+1,"principle imgs")
 
