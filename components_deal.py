@@ -4,18 +4,24 @@ import time
 
 path = "./principle"
 images = []
+
+mean_img = cv2.imread(path+f"/mean.png")
+output = np.array(mean_img,dtype=np.int16)
+
 for i in range(0, 20):
     image_path = path+f"/p{i}.png"
     img = cv2.imread(image_path)
     # print(type(img))
-    images.append(np.array(img,dtype=np.int16))
-mean_img = cv2.imread(path+f"/mean.png")
+    delta = np.array(img,dtype=np.int16)-output
+    images.append(delta)
 
-output = np.array(mean_img,dtype=np.int16)
 print("principle images loaded")
 
 cv2.namedWindow('PCA',cv2.WINDOW_NORMAL)
-cv2.resizeWindow('PCA', 4000,4000)
+cv2.resizeWindow('PCA', 900,900)
+
+cv2.namedWindow('PCA result',cv2.WINDOW_NORMAL)
+cv2.resizeWindow('PCA result', 2000,2000)
 # define a null callback function for Trackbar
 def null(x): pass
 
@@ -43,9 +49,9 @@ def weighting():
         formated_out = np.clip(output,0,255)
         formated_out = formated_out.astype(np.uint8)
         # print(formated_out[0][0])
-        cv2.imshow('PCA', formated_out)
+        cv2.imshow('PCA result', formated_out)
 
-cv2.imshow('PCA', mean_img)
+cv2.imshow('PCA result', mean_img)
 print("Press Keyboard 'q' to Quit")
 while True:
     weighting()
