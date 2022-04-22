@@ -1,3 +1,5 @@
+from chunk import Chunk
+from unittest import result
 from sklearn.decomposition import PCA, IncrementalPCA
 import numpy as np
 import cv2
@@ -16,7 +18,7 @@ print("Loaded all",i,"images")
 # change into numpy matrixs
 all_image = np.stack(input,axis=0)
 # trans to 0-1 format float64
-all_image = (all_image.astype(np.float16))
+all_image = (all_image.astype(np.float16)-128)/127
 
 ### shape: #_of_imag x 1024x1024x3
 # PCA, keeps 20 features
@@ -25,7 +27,7 @@ pca = PCA(n_components = COM_NUM)
 pca.fit(all_image)
 result1 = pca.fit_transform(all_image)
 saving_path = "./prin_test"
-"""
+
 result = pca.components_
 sv = pca.singular_values_
 print(sv.shape)
@@ -41,16 +43,14 @@ for i in range(0,COM_NUM):
 print(result.shape)
 print(result1.shape)
 result = np.matmul(result1,result)
-
+"""
 print(np.sum(pca.explained_variance_ratio_))
 # result += pca.mean_
-for j in range(0,COM_NUM):
-    reconImage = result[j]-pca.mean_
 result=result.reshape(-1,1024,1024,3)
 for j in range(0,COM_NUM):
-    reconImage = result[j]
+    reconImage = result[j]*127+128
     # reconImage = reconImage.reshape(4096,4096,3)
-    reconImage = np.clip(reconImage,0,255)
-    reconImage = reconImage.astype(np.uint8)
-    cv2.imwrite(os.path.join(saving_path,("p"+str(j+6)+".png")),reconImage)
+    # reconImage = np.clip(reconImage,0,255)
+    # reconImage = reconImage.astype(np.uint8)
+    cv2.imwrite(os.path.join(saving_path,("p"+str(j+8)+".png")),reconImage)
     print("Saved",j+1,"principle imgs")
