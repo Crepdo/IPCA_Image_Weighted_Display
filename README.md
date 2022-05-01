@@ -1,4 +1,4 @@
-# PCA_Img_Reconstruction
+# IPCA on Images and Interactive Display
 Including scripts for :
 
 1. Batched Incremental PCA targrting at find principles of large Image dataset.
