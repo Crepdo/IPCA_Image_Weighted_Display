@@ -1,6 +1,17 @@
 # PCA_Img_Reconstruction
-PCA image reconstruction
+Including scripts for :
 
+1. Batched Incremental PCA targrting at find principles of large Image dataset.
+
+2. Instant Interactive Display of Imange reconstructed from Weighted principles casting on the mean. 
+
+    (Use Jupyter's ipywidgets API, for running on server)
+
+3. Instant Interactive Display of Imange reconstructed from Weighted principles casting on the mean, constructing data from .npy.
+
+    (Use CV2's GUI, can running fast on Laptops)
+
+***
 Some useful links help understanding:
 
 https://jakevdp.github.io/PythonDataScienceHandbook/05.09-principal-component-analysis.html
