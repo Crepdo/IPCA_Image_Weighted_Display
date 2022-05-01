@@ -1,4 +1,4 @@
-# IPCA on Images and Interactive Display
+# IPCA on Images and Interactive principle Display
 Including scripts for :
 
 1. Batched Incremental PCA targrting at find principles of large Image dataset.
